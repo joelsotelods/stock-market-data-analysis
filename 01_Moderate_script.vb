@@ -18,10 +18,6 @@ Sub stock_market_data_analysis()
         SheetNameStr = currentsheet.Name
         CodeNameStr = currentsheet.CodeName
 
-        ' temp conditional
-        if SheetNameStr = "2015" then Exit For
-            
-
         currentsheet.Range("I1").Value = "Ticker"
         currentsheet.Range("J1").Value = "Yearly Change"
         currentsheet.Range("K1").Value = "Percent Change"
@@ -38,14 +34,22 @@ Sub stock_market_data_analysis()
                 
                 'xx
                 open_val = currentsheet.Cells(i, 3).Value
+                MsgBox "Open " & open_val
             else
                 if currentsheet.Cells(ticker_index, 9).Value = currentsheet.Cells(i, 1).Value then
                     currentsheet.Cells(ticker_index, 12).Value = currentsheet.Cells(ticker_index, 12).Value + currentsheet.Cells(i, 7).Value
                 else
                     'save the close val of the year (last row of the Ticker)
-                    close_val = currentsheet.Cells(i, 6).Value
+                    close_val = currentsheet.Cells(i-1, 6).Value
+
+                    MsgBox "Close " & close_val & " Open " & open_val
                     currentsheet.Cells(ticker_index, 10).Value = close_val - open_val
+
+                    'percent change
+                    currentsheet.Cells(ticker_index, 11).Value = (close_val/open_val) -1 
                     
+
+
                     ticker_index = ticker_index + 1
                     i = i -1 'this is needed because the <Next i> will ommit the first value of the new Ticker if not added.
                         ' I figure this out by making a Pivot Table of the original data and compairing that to the info obtained by this script.
@@ -56,6 +60,16 @@ Sub stock_market_data_analysis()
 
         Next i
         
+        'save the close val of the year (last row of the Ticker) -- unique for last Ticker
+        close_val = currentsheet.Cells(i-1, 6).Value
+
+        MsgBox "Close " & close_val & " Open " & open_val
+        currentsheet.Cells(ticker_index, 10).Value = close_val - open_val
+
+        'percent change
+        currentsheet.Cells(ticker_index, 11).Value = (close_val/open_val) -1 
+
+
         MsgBox SheetNameStr & " was processed. Rows of the file: " & LastRow
         ticker_index = 2
 
