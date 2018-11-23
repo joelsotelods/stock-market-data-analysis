@@ -8,3 +8,20 @@ ehthumbs.db
 Thumbs.db
 .AppleDouble
 .LSOverride
+
+#ignore excel macros files because they are too heavy.. Ill just upload the scripts
+*.xlsm
+
+*.tmp
+
+# Word temporary
+~$*.doc*
+
+# Excel temporary
+~$*.xls*
+
+# Excel Backup File
+*.xlk
+
+# PowerPoint temporary
+~$*.ppt*
