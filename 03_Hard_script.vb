@@ -1,4 +1,4 @@
-Sub stock_market_data_analysis()
+Sub stock_market_data_analysis_greatests()
 
     Dim SheetNameStr As String
     Dim CodeNameStr As String
@@ -34,7 +34,7 @@ Sub stock_market_data_analysis()
                 
                 'xx
                 open_val = currentsheet.Cells(i, 3).Value
-                MsgBox "Open " & open_val
+                'MsgBox "Open " & open_val
             else
                 if currentsheet.Cells(ticker_index, 9).Value = currentsheet.Cells(i, 1).Value then
                     currentsheet.Cells(ticker_index, 12).Value = currentsheet.Cells(ticker_index, 12).Value + currentsheet.Cells(i, 7).Value
@@ -42,11 +42,15 @@ Sub stock_market_data_analysis()
                     'save the close val of the year (last row of the Ticker)
                     close_val = currentsheet.Cells(i-1, 6).Value
 
-                    MsgBox "Close " & close_val & " Open " & open_val
+                    'MsgBox "Close " & close_val & " Open " & open_val
                     currentsheet.Cells(ticker_index, 10).Value = close_val - open_val
 
                     'percent change
-                    currentsheet.Cells(ticker_index, 11).Value = (close_val/open_val) -1 
+                    if open_val <> 0 then
+                        currentsheet.Cells(ticker_index, 11).Value = (close_val/open_val) -1
+                    else
+                        currentsheet.Cells(ticker_index, 11).Value = "N/A"
+                    end if
                     
 
 
@@ -63,11 +67,16 @@ Sub stock_market_data_analysis()
         'save the close val of the year (last row of the Ticker) -- unique for last Ticker
         close_val = currentsheet.Cells(i-1, 6).Value
 
-        MsgBox "Close " & close_val & " Open " & open_val
+        'MsgBox "Close " & close_val & " Open " & open_val
         currentsheet.Cells(ticker_index, 10).Value = close_val - open_val
 
         'percent change
-        currentsheet.Cells(ticker_index, 11).Value = (close_val/open_val) -1 
+        ' Compound Annual Growth Rate = (ending Balance / Beginning Balance)^(1/#years) - 1
+        if open_val <> 0 then
+            currentsheet.Cells(ticker_index, 11).Value = (close_val/open_val) -1
+        else
+            currentsheet.Cells(ticker_index, 11).Value = "N/A"
+        end if
 
 
         MsgBox SheetNameStr & " was processed. Rows of the file: " & LastRow
