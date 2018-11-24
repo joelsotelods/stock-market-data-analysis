@@ -43,16 +43,26 @@ Sub stock_market_data_analysis()
                     close_val = currentsheet.Cells(i-1, 6).Value
 
                     'MsgBox "Close " & close_val & " Open " & open_val
+                    if (close_val - open_val) >=10 or (close_val - open_val) <= -10 then
+                        currentsheet.Cells(ticker_index, 10).NumberFormat="0.00000000"
+                    else
+                        currentsheet.Cells(ticker_index, 10).NumberFormat="0.000000000"
+                    end if
+
+                            if (close_val - open_val) >=0 then
+                                currentsheet.Cells(ticker_index, 10).Interior.ColorIndex = 4
+                            else
+                                currentsheet.Cells(ticker_index, 10).Interior.ColorIndex = 3
+                            end if
                     currentsheet.Cells(ticker_index, 10).Value = close_val - open_val
 
                     'percent change
                     if open_val <> 0 then
+                        currentsheet.Cells(ticker_index, 11).NumberFormat="0.00%"
                         currentsheet.Cells(ticker_index, 11).Value = (close_val/open_val) -1
                     else
                         currentsheet.Cells(ticker_index, 11).Value = "N/A"
                     end if
-                    
-
 
                     ticker_index = ticker_index + 1
                     i = i -1 'this is needed because the <Next i> will ommit the first value of the new Ticker if not added.
@@ -68,18 +78,36 @@ Sub stock_market_data_analysis()
         close_val = currentsheet.Cells(i-1, 6).Value
 
         'MsgBox "Close " & close_val & " Open " & open_val
+        if (close_val - open_val) >=10 or (close_val - open_val) <= -10 then
+            currentsheet.Cells(ticker_index, 10).NumberFormat="0.00000000"
+        else
+            currentsheet.Cells(ticker_index, 10).NumberFormat="0.000000000"
+        end if
+
+        if (close_val - open_val) >=0 then
+            currentsheet.Cells(ticker_index, 10).Interior.ColorIndex = 4
+        else
+            currentsheet.Cells(ticker_index, 10).Interior.ColorIndex = 3
+        end if
+
         currentsheet.Cells(ticker_index, 10).Value = close_val - open_val
+
+
 
         'percent change
         ' Compound Annual Growth Rate = (ending Balance / Beginning Balance)^(1/#years) - 1
         if open_val <> 0 then
+            currentsheet.Cells(ticker_index, 11).NumberFormat="0.00%"
             currentsheet.Cells(ticker_index, 11).Value = (close_val/open_val) -1
         else
             currentsheet.Cells(ticker_index, 11).Value = "N/A"
         end if
 
+        currentsheet.Columns("J").EntireColumn.AutoFit
+        currentsheet.Columns("K").EntireColumn.AutoFit
+        currentsheet.Columns("L").EntireColumn.AutoFit
 
-        MsgBox SheetNameStr & " was processed. Rows of the file: " & LastRow
+        MsgBox SheetNameStr & " was processed. Rows on the sheet: " & LastRow
         ticker_index = 2
 
     Next currentsheet
