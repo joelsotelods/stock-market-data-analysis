@@ -9,7 +9,7 @@ Sub stock_market_data_analysis()
 
     ticker_index = 2
 
-    'Varialbes to store the yearly change from open to close
+    'Variables to store the yearly change from open to close
     Dim open_val As Double
     Dim close_val As Double
 

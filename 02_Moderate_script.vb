@@ -54,7 +54,7 @@ Sub stock_market_data_analysis()
                         currentsheet.Cells(ticker_index, 10).NumberFormat="0.000000000"
                     end if
 
-                    'Conditional formmating to set the cell green when positiva and red when negative
+                    'Conditional formmating to set the cell green when positive and red when negative
                     if (close_val - open_val) >=0 then
                         currentsheet.Cells(ticker_index, 10).Interior.ColorIndex = 4
                     else
