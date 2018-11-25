@@ -11,7 +11,7 @@ To analyze this information it is needed, for every stock, the following metrics
 - The percent change from the what it opened the year at to what it closed.
 - The total volume of the stock.
 
-And also, to deicide which Stock is more reliable to invest in, I want to know the following Metrics by year:
+And also, to decide which Stock is more reliable to invest in, we needed to know the following Metrics by year:
 
 - Greatest % increase.
 - Greatest % decrease.
