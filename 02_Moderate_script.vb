@@ -10,7 +10,7 @@ Sub stock_market_data_analysis()
 
     ticker_index = 2
 
-    'Varialbes to store the yearly change from open to close
+    'Variables to store the yearly change from open to close
     Dim open_val As Double
     Dim close_val As Double
 
@@ -31,20 +31,20 @@ Sub stock_market_data_analysis()
         LastRow = currentsheet.Cells(currentsheet.Rows.Count, 1).End(xlUp).Row
                                   
         For i = 2 To LastRow+1
-            'currentsheet.Cells(i, 7).Value
             
             if IsEmpty(currentsheet.Cells(ticker_index, 9).Value)  then
+
                 currentsheet.Cells(ticker_index, 9).Value = currentsheet.Cells(i, 1).Value
                 currentsheet.Cells(ticker_index, 12).Value = currentsheet.Cells(i, 7).Value
                 
-                'xx
+                'saving the open value
                 open_val = currentsheet.Cells(i, 3).Value
                 'MsgBox "Open " & open_val
             else
                 if currentsheet.Cells(ticker_index, 9).Value = currentsheet.Cells(i, 1).Value then
                     currentsheet.Cells(ticker_index, 12).Value = currentsheet.Cells(ticker_index, 12).Value + currentsheet.Cells(i, 7).Value
                 else
-                    'save the close val of the year (last row of the Ticker)
+                    'saving the close val of the year (last row of the Ticker)
                     close_val = currentsheet.Cells(i-1, 6).Value
 
                     'MsgBox "Close " & close_val & " Open " & open_val
@@ -54,6 +54,7 @@ Sub stock_market_data_analysis()
                         currentsheet.Cells(ticker_index, 10).NumberFormat="0.000000000"
                     end if
 
+                    'Conditional formmating to set the cell green when positiva and red when negative
                     if (close_val - open_val) >=0 then
                         currentsheet.Cells(ticker_index, 10).Interior.ColorIndex = 4
                     else
@@ -63,11 +64,13 @@ Sub stock_market_data_analysis()
                     currentsheet.Cells(ticker_index, 10).Value = close_val - open_val
 
                     'percent change
+                    ' Compound Annual Growth Rate = (ending Balance / Beginning Balance)^(1/#years) - 1   
                     if open_val <> 0 then
                         currentsheet.Cells(ticker_index, 11).NumberFormat="0.00%"
                         currentsheet.Cells(ticker_index, 11).Value = (close_val/open_val) -1
                     else
-                        currentsheet.Cells(ticker_index, 11).Value = "N/A"
+                        'when open value is 0:
+                        currentsheet.Cells(ticker_index, 11).Value = "N/A" 
                     end if
 
                     ticker_index = ticker_index + 1
@@ -77,16 +80,18 @@ Sub stock_market_data_analysis()
 
             end if
 
-
         Next i
         
+        'Autofit the column size
         currentsheet.Columns("J").EntireColumn.AutoFit
         currentsheet.Columns("K").EntireColumn.AutoFit
         currentsheet.Columns("L").EntireColumn.AutoFit
 
-        MsgBox SheetNameStr & " was processed. Rows on the sheet: " & LastRow
+        'MsgBox SheetNameStr & " was processed. Rows on the sheet: " & LastRow
         ticker_index = 2
 
     Next currentsheet
+
+    MsgBox "The last Sheet (" & SheetNameStr & ") was processed."
 
 End Sub

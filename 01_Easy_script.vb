@@ -4,6 +4,7 @@ Sub stock_market_data_analysis()
     Dim CodeNameStr As String
 
     Dim LastRow As Long
+    Dim LastRow_tmp As Long
 
     Dim i As Long
 
@@ -14,13 +15,16 @@ Sub stock_market_data_analysis()
         SheetNameStr = currentsheet.Name
         CodeNameStr = currentsheet.CodeName
 
+        ' To clean the cells that we are going to use in the case this script runs twice
+        LastRow_tmp = currentsheet.Cells(currentsheet.Rows.Count, 9).End(xlUp).Row
+        currentsheet.Range("H1:J" & LastRow_tmp).Clear
+
         currentsheet.Range("I1").Value = "Ticker"
         currentsheet.Range("J1").Value = "Total Stock Volume"
 
         LastRow = currentsheet.Cells(currentsheet.Rows.Count, 1).End(xlUp).Row
                                   
         For i = 2 To LastRow
-            'currentsheet.Cells(i, 7).Value
             
             if IsEmpty(currentsheet.Cells(ticker_index, 9).Value)  then
                 currentsheet.Cells(ticker_index, 9).Value = currentsheet.Cells(i, 1).Value
@@ -36,12 +40,16 @@ Sub stock_market_data_analysis()
 
             end if
 
-
         Next i
-        
-        MsgBox SheetNameStr & " was processed. Rows of the file: " & LastRow
+
+        'Autofit the column size
+        currentsheet.Columns("J").EntireColumn.AutoFit
+
+        'MsgBox SheetNameStr & " was processed. Rows on the sheet: " & LastRow
         ticker_index = 2
 
     Next currentsheet
+
+    MsgBox "The last Sheet (" & SheetNameStr & ") was processed."
 
 End Sub
