@@ -24,9 +24,9 @@ To solve this project I used Visual Basic for Applications inside Excel.
 
 The problem was splited in three parts:
 
- 1. To get the total amount of volume each stock had over the year. [Script 1](01_Easy_script.vb) 
- 2. To get the Yearly Change and the Volume of the stock from what the stock opened the year at to what the closing price was. [Script 2](02_Moderate_script.vb)
- 3. To locate the stock with the "Greatest % increase", "Greatest % Decrease" and "Greatest total volume". [Final Script](03_Hard_script.vb)
+ 1. To get the total amount of volume each stock had over the year. [Script 1](Scripts/01_Easy_script.vb) 
+ 2. To get the Yearly Change and the Volume of the stock from what the stock opened the year at to what the closing price was. [Script 2](Scripts/02_Moderate_script.vb)
+ 3. To locate the stock with the "Greatest % increase", "Greatest % Decrease" and "Greatest total volume". [Final Script](Scripts/03_Hard_script.vb)
 
 
 ### Screenshots

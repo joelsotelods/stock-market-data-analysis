@@ -25,3 +25,8 @@ Thumbs.db
 
 # PowerPoint temporary
 ~$*.ppt*
+
+################
+# Ignoring the reports because those are too heavy to be uploaded.
+
+dir_to_ignore/Reports
