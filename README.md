@@ -9,12 +9,12 @@ To analyze this information it is needed, for every stock, the following metrics
 
 - Yearly change from what the stock opened the year at to what the closing price was.
 - The percent change from the what it opened the year at to what it closed.
-- The total Volume of the stock.
+- The total volume of the stock.
 
 And also, to deicide which Stock is more reliable to invest in, I want to know the following Metrics by year:
 
 - Greatest % increase.
-- Greatest % Decrease.
+- Greatest % decrease.
 - Greatest total volume.
 
 
@@ -26,11 +26,12 @@ The problem was splited in three parts:
 
  1. To get the total amount of volume each stock had over the year. [Script 1](01_Easy_script.vb) 
  2. To get the Yearly Change and the Volume of the stock from what the stock opened the year at to what the closing price was. [Script 2](02_Moderate_script.vb)
- 3. To locate the stock with the "Greatest % increase", "Greatest % Decrease" and "Greatest total volume". [Final Script](02_Hard_script.vb)
+ 3. To locate the stock with the "Greatest % increase", "Greatest % Decrease" and "Greatest total volume". [Final Script](03_Hard_script.vb)
+
 
 ### Screenshots
 
-The following screenshots show how the results after running the Final Script.
+The following screenshots show how the information is displayed after running the Final Script.
 
 #### Sheet for 2014
 
